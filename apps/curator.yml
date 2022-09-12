@@ -2,7 +2,7 @@ apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: ClusterCurator
 metadata:
   name: '{{cluster}}-upgrade'
-  namespace: managed-clusters-version
+  namespace: '{{cluster}}'
 spec:
   install:
     posthook: []
