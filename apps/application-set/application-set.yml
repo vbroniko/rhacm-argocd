@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-reg-app-set
+  namespace: openshift-gitops
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:vbroniko/rhacm-argocd.git
+        revision: HEAD
+        files:
+          - path: ACM-ArgoCD/acm-register-cluster/values-*.yaml
+  template:
+    metadata:
+      namespace: openshift-gitops
+      name: 'cluster-{{clusterName}}'
+    spec:
+      project: default
+      source:
+        helm:
+          valueFiles:
+            - 'values-{{clusterName}}.yaml'
+            - 'values{{extraLabels.env}}.yaml'
+        path: apps
+        repoURL: 
+        targetRevision: HEAD
+      syncPolicy:
+        automated:
+          selfHeal: true
+      destination: git@github.com:vbroniko/rhacm-argocd.git
+        server: https://kubernetes.default.svc
