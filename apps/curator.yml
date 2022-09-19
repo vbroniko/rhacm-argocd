@@ -1,16 +1,20 @@
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: ClusterCurator
 metadata:
-  name: '{{cluster}}-upgrade'
-  namespace: '{{cluster}}'
+  name: {{ .Values.clusterName }}-{{ .Values.version | replace "." "" }}-{{ .Values.channel | replace "." "" }}
+  namespace: {{ .Values.clusterName }}
 spec:
+  desiredCuration: upgrade
   install:
-    posthook: []
+    towerAuthSecret: awx- //will be normalized
     prehook: []
-    towerAuthSecret: credentials-ansible
-  upgrade:
     posthook: []
+  upgrade:
+    channel: {{ .Values.channel }}
+    desiredUpdate: {{ .Values.version }}
+    towerAuthSecret: awx- //will be normalized
     prehook:
-    - extra_vars: {}
-      name: Demo Job Template
-    towerAuthSecret: credentials-ansible
+      - name: ACM  Upgrade Prechecks //will be normalized
+        extra_vars:
+          clusterName: {{ .Values.clusterName }}
+    posthook: []
