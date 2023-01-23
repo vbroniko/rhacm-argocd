@@ -31,11 +31,3 @@ spec:
               kind: Namespace
               metadata:
                 name: rhacs-operator
-          - complianceType: musthave
-            objectDefinition:
-              apiVersion: operators.coreos.com/v1
-              kind: OperatorGroup
-              metadata:
-                name: rhacs-operator-group
-                namespace: rhacs-operator
-              spec: {}
