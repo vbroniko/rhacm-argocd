@@ -4,7 +4,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-advanced-cluster-security-central
-  namespace: open-cluster-management
+  namespace: rhacm-policies
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: CM Configuration Management
@@ -108,7 +108,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-advanced-cluster-security-central
-  namespace: open-cluster-management
+  namespace: rhacm-policies
 placementRef:
   name: placement-policy-advanced-cluster-security-central
   kind: PlacementRule
@@ -122,7 +122,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-advanced-cluster-security-central
-  namespace: open-cluster-management
+  namespace: rhacm-policies
 spec:
   clusterConditions:
   - status: "True"
