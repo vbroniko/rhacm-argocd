@@ -4,7 +4,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-advanced-cluster-security-central
-  namespace: openshift-gitops
+  namespace: rhacm-policies
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: CM Configuration Management
@@ -18,6 +18,7 @@ spec:
       kind: ConfigurationPolicy
       metadata:
         name: advanced-cluster-security-namespace
+        namespace: rhacm-policies
       spec:
         remediationAction: inform
         severity: high
@@ -47,6 +48,7 @@ spec:
       kind: ConfigurationPolicy
       metadata:
         name: advanced-cluster-security-operator-subscription
+        namespace: rhacm-policies
       spec:
         remediationAction: inform
         severity: high
@@ -69,6 +71,7 @@ spec:
       kind: ConfigurationPolicy
       metadata:
         name: advanced-cluster-security-central
+        namespace: rhacm-policies
       spec:
         remediationAction: inform
         severity: high
@@ -103,30 +106,3 @@ spec:
                       minReplicas: 2
                       replicas: 3
                   scannerComponent: Enabled
----
-apiVersion: policy.open-cluster-management.io/v1
-kind: PlacementBinding
-metadata:
-  name: binding-policy-advanced-cluster-security-central
-  namespace: openshift-gitops
-placementRef:
-  name: placement-policy-advanced-cluster-security-central
-  kind: PlacementRule
-  apiGroup: apps.open-cluster-management.io
-subjects:
-- name: policy-advanced-cluster-security-central
-  kind: Policy
-  apiGroup: policy.open-cluster-management.io
----
-apiVersion: apps.open-cluster-management.io/v1
-kind: PlacementRule
-metadata:
-  name: placement-policy-advanced-cluster-security-central
-  namespace: openshift-gitops
-spec:
-  clusterConditions:
-  - status: "True"
-    type: ManagedClusterConditionAvailable
-  clusterSelector:
-    matchExpressions:
-      - {key: local-cluster, operator: In, values: ["true"]}
