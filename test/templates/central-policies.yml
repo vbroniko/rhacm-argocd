@@ -4,7 +4,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-advanced-cluster-security-central
-  namespace: rhacm-policies
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: CM Configuration Management
@@ -18,7 +17,6 @@ spec:
       kind: ConfigurationPolicy
       metadata:
         name: advanced-cluster-security-namespace
-        namespace: rhacm-policies
       spec:
         remediationAction: inform
         severity: high
@@ -48,7 +46,6 @@ spec:
       kind: ConfigurationPolicy
       metadata:
         name: advanced-cluster-security-operator-subscription
-        namespace: rhacm-policies
       spec:
         remediationAction: inform
         severity: high
@@ -71,7 +68,6 @@ spec:
       kind: ConfigurationPolicy
       metadata:
         name: advanced-cluster-security-central
-        namespace: rhacm-policies
       spec:
         remediationAction: inform
         severity: high
