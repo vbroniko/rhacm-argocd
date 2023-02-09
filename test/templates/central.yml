@@ -25,7 +25,7 @@ spec:
               apiVersion: v1
               kind: Namespace
               metadata:
-                name: stackrox
+                name: rhacs-operator
           - complianceType: musthave
             objectDefinition:
               apiVersion: v1
@@ -76,7 +76,7 @@ spec:
               apiVersion: platform.stackrox.io/v1alpha1
               kind: Central
               metadata:
-                namespace: stackrox
+                namespace: rhacs-operator
                 name: stackrox-central-services
               spec:
                 central:
