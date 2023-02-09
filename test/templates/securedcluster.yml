@@ -98,6 +98,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-advanced-managed-cluster-security
+  namespace: rhacs-operator
 placementRef:
   name: placement-policy-advanced-managed-cluster-security
   kind: PlacementRule
@@ -111,6 +112,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-advanced-managed-cluster-security
+  namespace: rhacs-operator
 spec:
   clusterConditions:
   - status: "True"
@@ -118,3 +120,4 @@ spec:
   clusterSelector:
     matchExpressions:
       - {key: vendor, operator: In, values: ["OpenShift"]}
+      - {key: local-cluster, operator: MustNotHave}
