@@ -80,7 +80,7 @@ spec:
                 name: stackrox-secured-cluster-services
               spec:
                 clusterName: |
-                  {{ fromSecret "open-cluster-management-agent" "hub-kubeconfig-secret" "cluster-name" | base64dec }}
+                  {{ fromClusterClaim 'name' }}
                 auditLogs:
                   collection: Auto
                 centralEndpoint: |
