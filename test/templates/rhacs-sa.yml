@@ -2,7 +2,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: rhacs-bootstrapper-sa
-  namespace: rhacm-policies
+  namespace: rhacs-operator
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: AC Access Control
@@ -26,7 +26,7 @@ spec:
 kind: Policy
 metadata:
   name: rhacs-bootstrapper-policy-role
-  namespace: rhacm-policies
+  namespace: rhacs-operator
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: AC Access Control
