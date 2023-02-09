@@ -1,0 +1,59 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-stackrox-bootstrapper
+  namespace: stackrox
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: managed-cluster-admission-control-tls
+      spec:
+        remediationAction: enforce
+        severity: high
+        object-templates:
+          - complianceType: musthave
+            objectDefinition:
+              kind: Job
+              apiVersion: batch/v1
+              metadata:
+                name: rhacs-bootstrapper
+                namespace: rhacs-operator
+                labels:
+                  job-name: rhacs-bootstrapper
+              spec:
+                parallelism: 1
+                completions: 1
+                backoffLimit: 6
+                template:
+                  metadata:
+                    name: rhacs-bootstrapper
+                    labels:
+                      job-name: rhacs-bootstrapper
+                  spec:
+                    containers:
+                      - name: bootstrapper
+                        image: default-route-openshift-image-registry.apps.cluster-7bn7n.7bn7n.sandbox2809.opentlc.com/rhacs-operator/bootstrapper:v3
+                        command:
+                          - '/bootstrap.sh'
+                        resources: {}
+                        terminationMessagePath: /dev/termination-log
+                        terminationMessagePolicy: File
+                        imagePullPolicy: IfNotPresent
+                    restartPolicy: Never
+                    terminationGracePeriodSeconds: 30
+                    dnsPolicy: ClusterFirst
+                    serviceAccountName: rhacs-bootstrapper
+                    serviceAccount: rhacs-bootstrapper
+                    securityContext: {}
+                    schedulerName: default-scheduler
+                completionMode: NonIndexed
+                suspend: false
