@@ -86,7 +86,7 @@ spec:
                 name: stackrox-secured-cluster-services
               spec:
                 clusterName: |
-                  {{ fromClusterClaim 'name' }}
+                  {{ fromClusterClaim "name" }}
                 auditLogs:
                   collection: Auto
                 centralEndpoint: |
