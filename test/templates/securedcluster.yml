@@ -34,6 +34,12 @@ spec:
                 name: rhacs-operator
           - complianceType: musthave
             objectDefinition:
+              apiVersion: v1
+              kind: Namespace
+              metadata:
+                name: rhacs-operator
+          - complianceType: musthave
+            objectDefinition:
               apiVersion: operators.coreos.com/v1
               kind: OperatorGroup
               metadata:
