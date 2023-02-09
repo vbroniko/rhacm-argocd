@@ -17,7 +17,7 @@ spec:
       metadata:
         name: managed-cluster-security-ns
       spec:
-        remediationAction: inform
+        remediationAction: enforce
         severity: high
         object-templates:
           - complianceType: musthave
