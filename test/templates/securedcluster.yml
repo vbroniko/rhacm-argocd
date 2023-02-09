@@ -127,4 +127,3 @@ spec:
   clusterSelector:
     matchExpressions:
       - {key: vendor, operator: In, values: ["OpenShift"]}
-      - {key: local-cluster, operator: MustNotHave}
