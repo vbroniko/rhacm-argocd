@@ -78,3 +78,30 @@ spec:
                                       schedulerName: default-scheduler
                                   completionMode: NonIndexed
                                   suspend: false
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: policy-job-rhacs-operator-binding
+  namespace: rhacs-operator
+placementRef:
+  name: placement-policy-advanced-cluster-security-central
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-job-rhacs-operator
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-advanced-cluster-security-central
+  namespace: rhacs-operator
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: local-cluster, operator: In, values: ["true"]}
