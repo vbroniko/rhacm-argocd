@@ -29,7 +29,7 @@ spec:
                 namespace: default
                 creationTimestamp: null
               data:
-                laurent: "XD"
+                laurent: "WEQ="
               type: Opaque
 ---
 apiVersion: policy.open-cluster-management.io/v1
