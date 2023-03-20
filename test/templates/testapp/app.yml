@@ -1,1 +1,61 @@
-
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-secrets-stackrox-secured-cluster
+  namespace: rhacs-operator
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: managed-cluster-admission-control-tls
+      spec:
+        remediationAction: enforce
+        severity: high
+        object-templates:
+          - complianceType: musthave
+            objectDefinition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: admission-control-tls
+                namespace: default
+                creationTimestamp: null
+              data:
+                laurent: "XD"
+              type: Opaque
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-secret-stackrox
+  namespace: rhacs-operator
+placementRef:
+  name: placement-secret
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-secrets-stackrox-secured-cluster
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-secret
+  namespace: rhacs-operator
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: vendor, operator: In, values: ["OpenShift"]}
+      - {key: local-cluster, operator: DoesNotExist}
