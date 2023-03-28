@@ -31,11 +31,11 @@ spec:
                 ports:
                   - containerPort: 8080
                     protocol: TCP
-                {{`{{- range $cluster := (lookup "cluster.open-cluster-management.io/v1" "ManagedCluster" "" "") }}`}}    
+                {{`{{range (lookup "cluster.open-cluster-management.io/v1" "ManagedCluster" "" "").items }}`}}    
                 env:
-                  - name: {{`{{ $cluster.metadata.labels.name }}`}}
-                    value: {{`{{ $cluster.spec.managedClusterClientConfigs.url }}`}}
-                {{`{{- end }}`}}
+                  - name: {{`{{ .metadata.labels.name }}`}}
+                    value: {{`{{ .spec.managedClusterClientConfigs.url }}`}}
+                {{`{{ end }}`}}
                 resources: {}
                 terminationMessagePath: /dev/termination-log
                 terminationMessagePolicy: File
