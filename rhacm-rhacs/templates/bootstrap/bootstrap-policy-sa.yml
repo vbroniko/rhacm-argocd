@@ -1,29 +1,3 @@
-apiVersion: policy.open-cluster-management.io/v1
-kind: Policy
-metadata:
-  name: rhacs-bootstrapper-sa
-  namespace: rhacs-operator
-  annotations:
-    policy.open-cluster-management.io/standards: NIST SP 800-53
-    policy.open-cluster-management.io/categories: AC Access Control
-    policy.open-cluster-management.io/controls: AC-3 Access Enforcement
-spec:
-  remediationAction: enforce
-  disabled: false
-  policy-templates:
-    - objectDefinition:
-        apiVersion: policy.open-cluster-management.io/v1
-        kind: ConfigurationPolicy
-        metadata:
-          name: rhacs-boostrapper-rolebinding
-        spec:
-          remediationAction: enforce # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
-          severity: high
-          namespaceSelector:
-            include: ["rhacs-operator"]
-          object-templates:
-          apiVersion: policy.open-cluster-management.io/v1
----
 kind: Policy
 metadata:
   name: rhacs-bootstrapper-policy-role
