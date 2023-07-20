@@ -12,6 +12,28 @@ spec:
   disabled: false
   policy-templates:
   - objectDefinition:
+     apiVersion: policy.open-cluster-management.io/v1
+     kind: ConfigurationPolicy
+     metadata:
+       name: advanced-cluster-security-namespace
+     spec:
+       remediationAction: inform
+       severity: high
+       object-templates:
+         - complianceType: musthave
+           objectDefinition:
+             apiVersion: v1
+             kind: Namespace
+             metadata:
+               name: rhacs-operator
+         - complianceType: musthave
+           objectDefinition:
+             apiVersion: v1
+             kind: Namespace
+             metadata:
+               name: rhacs-operator
+         - complianceType: musthave
+  - objectDefinition:
       apiVersion: policy.open-cluster-management.io/v1
       kind: ConfigurationPolicy
       metadata:
