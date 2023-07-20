@@ -2,7 +2,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
-  name: binding-policy-advanced-cluster-security-central
+  name: binding-boostrapperjob
   namespace: open-cluster-management
 placementRef:
   name: placement-boostrapperjob
