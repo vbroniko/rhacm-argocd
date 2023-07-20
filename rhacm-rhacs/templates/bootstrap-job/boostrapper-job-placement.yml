@@ -9,7 +9,7 @@ placementRef:
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
-- name: policy-central
+- name: policy-stackrox-bootstrapper
   kind: Policy
   apiGroup: policy.open-cluster-management.io
 ---
