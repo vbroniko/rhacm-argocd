@@ -4,18 +4,18 @@ metadata:
   name: binding-policy-secret-stackrox
   namespace: rhacs-operator
 placementRef:
-  name: placement-secret
+  name: placement-sc
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
-- name: policy-secrets-stackrox-secured-cluster
+- name: policy-advanced-managed-cluster-security
   kind: Policy
   apiGroup: policy.open-cluster-management.io
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: placement-secret
+  name: placement-sc
   namespace: rhacs-operator
 spec:
   clusterConditions:
