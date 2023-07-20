@@ -31,7 +31,7 @@ spec:
                   namespace: rhacs-operator
             - complianceType: musthave
               objectDefinition:
-                kind: ClusterRoleBinding # role binding must exist
+                kind: RoleBinding # role binding must exist
                 apiVersion: rbac.authorization.k8s.io/v1
                 metadata:
                   name: rhacs-bootstrapper-admin-rolebinding
