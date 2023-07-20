@@ -3,7 +3,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-advanced-cluster-security-central
-  namespace: rhacs-operator
+  namespace: default
 placementRef:
   name: placement-policy-advanced-cluster-security-central
   kind: PlacementRule
@@ -16,7 +16,7 @@ subjects:
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  namespace: rhacs-operator
+  namespace: default
   name: placement-policy-advanced-cluster-security-central
 spec:
   clusterConditions:
