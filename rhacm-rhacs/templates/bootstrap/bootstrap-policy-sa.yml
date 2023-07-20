@@ -38,9 +38,9 @@ spec:
                   namespace: rhacs-operator
                 subjects:
                 - kind: User
-                  name: rhacs-bootstrapper # Name is case sensitive
+                  name: rhacs-bootstrapper
                   apiGroup: rbac.authorization.k8s.io
                 roleRef:
-                  kind: ClusterRole #this must be Role or ClusterRole
+                  kind: ClusterRole
                   name: admin
                   apiGroup: rbac.authorization.k8s.io
