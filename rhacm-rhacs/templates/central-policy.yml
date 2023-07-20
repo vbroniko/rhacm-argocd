@@ -114,7 +114,7 @@ subjects:
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-namespace: rhacs-operator
+  namespace: rhacs-operator
   name: placement-policy-advanced-cluster-security-central
 spec:
   clusterConditions:
