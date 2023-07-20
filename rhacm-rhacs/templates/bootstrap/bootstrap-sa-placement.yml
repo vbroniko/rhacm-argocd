@@ -5,7 +5,7 @@ metadata:
   name: binding-sa-rb
   namespace: open-cluster-management
 placementRef:
-  name: placement-policy-advanced-cluster-security-central
+  name: rhacs-bootstrapper-policy-role
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
@@ -17,7 +17,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   namespace: open-cluster-management
-  name: placement-sa-rb
+  name: rhacs-bootstrapper-policy-role
 spec:
   clusterConditions:
   - status: "True"
@@ -25,30 +25,4 @@ spec:
   clusterSelector:
     matchExpressions:
       - {key: local-cluster, operator: In, values: ["true"]}
----
-apiVersion: policy.open-cluster-management.io/v1
-kind: PlacementBinding
-metadata:
-  name: binding-sa
-  namespace: open-cluster-management
-placementRef:
-  name: placement-policy-advanced-cluster-security-central
-  kind: PlacementRule
-  apiGroup: apps.open-cluster-management.io
-subjects:
-- name: policy-central
-  kind: Policy
-  apiGroup: policy.open-cluster-management.io
----
-apiVersion: apps.open-cluster-management.io/v1
-kind: PlacementRule
-metadata:
-  namespace: open-cluster-management
-  name: placement-sa
-spec:
-  clusterConditions:
-  - status: "True"
-    type: ManagedClusterConditionAvailable
-  clusterSelector:
-    matchExpressions:
-      - {key: local-cluster, operator: In, values: ["true"]}
+
