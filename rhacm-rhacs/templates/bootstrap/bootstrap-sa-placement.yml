@@ -5,11 +5,11 @@ metadata:
   name: binding-sa-rb
   namespace: open-cluster-management
 placementRef:
-  name: rhacs-bootstrapper-policy-role
+  name: rhacs-bootstrapper-policy-role-pb
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
-- name: policy-central
+- name: rhacs-bootstrapper-policy-role
   kind: Policy
   apiGroup: policy.open-cluster-management.io
 ---
@@ -17,7 +17,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   namespace: open-cluster-management
-  name: rhacs-bootstrapper-policy-role
+  name: rhacs-bootstrapper-policy-role-pr
 spec:
   clusterConditions:
   - status: "True"
