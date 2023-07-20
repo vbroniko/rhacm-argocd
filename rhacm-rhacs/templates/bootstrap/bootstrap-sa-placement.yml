@@ -5,7 +5,7 @@ metadata:
   name: binding-sa-rb
   namespace: rhacs-operator
 placementRef:
-  name: rhacs-bootstrapper-policy-role-pb
+  name: rhacs-bootstrapper-policy-role-pr
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
