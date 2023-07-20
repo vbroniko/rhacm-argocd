@@ -3,7 +3,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-sa-rb
-  namespace: open-cluster-management
+  namespace: rhacs-operator
 placementRef:
   name: rhacs-bootstrapper-policy-role-pb
   kind: PlacementRule
@@ -16,7 +16,7 @@ subjects:
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  namespace: open-cluster-management
+  namespace: rhacs-operator
   name: rhacs-bootstrapper-policy-role-pr
 spec:
   clusterConditions:
