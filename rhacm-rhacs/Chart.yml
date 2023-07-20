@@ -1,6 +1,6 @@
 apiVersion: v2
 name: acm-demo-rhacs
-description: Demo-consultant day RHACM RHACS
+description: Demo-consultant-day-RHACM-RHACS
 type: application
 version: 0.1.0
 appVersion: "1.0"
