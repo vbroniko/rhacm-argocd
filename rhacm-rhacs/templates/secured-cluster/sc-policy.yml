@@ -1,0 +1,143 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-secrets-stackrox-secured-cluster
+  namespace: rhacs-operator
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: managed-cluster-admission-control-tls
+      spec:
+        remediationAction: enforce
+        severity: high
+        object-templates:
+          - complianceType: musthave
+            objectDefinition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: admission-control-tls
+                namespace: rhacs-operator
+                annotations:
+                  init-bundle.stackrox.io/created-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "createdat")  hub}}'
+                  init-bundle.stackrox.io/expires-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "expiresat")  hub}}'
+                  init-bundle.stackrox.io/id: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "id")  hub}}'
+                  init-bundle.stackrox.io/name: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "name")  hub}}'
+              data:
+                admission-control-cert.pem: '{{hub fromSecret "rhacs-operator" "admission-control-tls" "admission-control-cert.pem" hub}}'
+                admission-control-key.pem: '{{hub fromSecret "rhacs-operator" "admission-control-tls" "admission-control-key.pem" hub}}'
+                ca.pem: '{{hub fromSecret "rhacs-operator" "admission-control-tls" "ca.pem" hub}}'
+              type: Opaque
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: managed-cluster-colletor-tls
+      spec:
+        remediationAction: enforce
+        severity: high
+        object-templates:
+          - complianceType: musthave
+            objectDefinition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: collector-tls
+                annotations:
+                  init-bundle.stackrox.io/created-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "createdat")  hub}}'
+                  init-bundle.stackrox.io/expires-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "expiresat")   hub}}'
+                  init-bundle.stackrox.io/id: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "id")   hub}}'
+                  init-bundle.stackrox.io/name: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "name")  hub}}'
+                namespace: rhacs-operator
+              data:
+                ca.pem: '{{hub fromSecret "rhacs-operator" "collector-tls" "ca.pem" hub}}'
+                collector-cert.pem: '{{hub fromSecret "rhacs-operator" "collector-tls" "collector-cert.pem" hub}}'
+                collector-key.pem: '{{hub fromSecret "rhacs-operator" "collector-tls" "collector-key.pem" hub}}'
+              type: Opaque
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: managed-cluster-sensor-tls
+      spec:
+        remediationAction: enforce
+        severity: high
+        object-templates:
+          - complianceType: musthave
+            objectDefinition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: sensor-tls
+                namespace: rhacs-operator
+                annotations:
+                  init-bundle.stackrox.io/created-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "createdat")  hub}}'
+                  init-bundle.stackrox.io/expires-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "expiresat")  hub}}'
+                  init-bundle.stackrox.io/id: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "id")  hub}}'
+                  init-bundle.stackrox.io/name: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "name") hub}}'
+              data:
+                ca.pem: '{{hub fromSecret "rhacs-operator" "sensor-tls" "ca.pem" hub}}'
+                sensor-cert.pem: '{{hub fromSecret "rhacs-operator" "sensor-tls" "sensor-cert.pem" hub}}'
+                sensor-key.pem: '{{hub fromSecret "rhacs-operator" "sensor-tls" "sensor-key.pem" hub}}'
+              type: Opaque
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: managed-cluster-scanner-dbs-tls
+      spec:
+        remediationAction: enforce
+        severity: high
+        object-templates:
+          - complianceType: musthave
+            objectDefinition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: scanner-db-tls
+                namespace: rhacs-operator
+                annotations:
+                  init-bundle.stackrox.io/created-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "createdat")  hub}}'
+                  init-bundle.stackrox.io/expires-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "expiresat")   hub}}'
+                  init-bundle.stackrox.io/id: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "id") hub}}'
+                  init-bundle.stackrox.io/name: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "name")   hub}}'
+              data:
+                ca.pem: '{{hub fromSecret "rhacs-operator" "scanner-db-tls" "ca.pem" hub}}'
+                cert.pem: '{{hub fromSecret "rhacs-operator" "scanner-db-tls" "cert.pem" hub}}'
+                key.pem: '{{hub fromSecret "rhacs-operator" "scanner-db-tls" "key.pem" hub}}'
+              type: Opaque 
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: managed-cluster-scanner-tls
+      spec:
+        remediationAction: enforce
+        severity: high
+        object-templates:
+          - complianceType: musthave
+            objectDefinition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: scanner-tls
+                namespace: rhacs-operator
+                annotations:
+                  init-bundle.stackrox.io/created-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "createdat")  hub}}'
+                  init-bundle.stackrox.io/expires-at: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "expiresat")  hub}}'
+                  init-bundle.stackrox.io/id: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "id")  hub}}'
+                  init-bundle.stackrox.io/name: '{{hub (fromConfigMap "rhacs-operator" "init-bundle-metadata" "name") hub}}'
+              data:
+                ca.pem: '{{hub fromSecret "rhacs-operator" "scanner-tls" "ca.pem" hub}}'
+                cert.pem: '{{hub fromSecret "rhacs-operator" "scanner-tls" "cert.pem" hub}}'
+                key.pem: '{{hub fromSecret "rhacs-operator" "scanner-tls" "key.pem" hub}}'
+              type: Opaque
