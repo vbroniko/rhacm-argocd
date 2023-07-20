@@ -3,7 +3,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-advanced-cluster-security-central
-  namespace: default
+  namespace: open-cluster-management
 placementRef:
   name: placement-policy-advanced-cluster-security-central
   kind: PlacementRule
@@ -16,7 +16,7 @@ subjects:
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  namespace: default
+  namespace: open-cluster-management
   name: placement-policy-advanced-cluster-security-central
 spec:
   clusterConditions:
