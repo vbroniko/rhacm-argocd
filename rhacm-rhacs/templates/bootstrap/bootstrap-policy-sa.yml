@@ -40,7 +40,6 @@ spec:
                 - kind: ServiceAccount
                   name: rhacs-bootstrapper
                   namespace: rhacs-operator
-                  apiGroup: rbac.authorization.k8s.io
                 roleRef:
                   kind: ClusterRole
                   name: admin
