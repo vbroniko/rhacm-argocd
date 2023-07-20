@@ -9,7 +9,7 @@ placementRef:
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
-- name: policy-advanced-cluster-security-central
+- name: policy-central
   kind: Policy
   apiGroup: policy.open-cluster-management.io
 ---
