@@ -41,7 +41,7 @@ spec:
                   spec:
                     containers:
                       - name: bootstrapper
-                        image: default-route-openshift-image-registry.apps.cluster-2qhn2.2qhn2.sandbox1900.opentlc.com/rhacs-operator/bootstrapper:v0
+                        image: default-route-openshift-image-registry.apps.cluster-7nd25.7nd25.sandbox293.opentlc.com/rhacs-operator/bootstrapper:v0
                         command:
                           - '/bootstrap.sh'
                         resources: {}
